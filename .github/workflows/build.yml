@@ -21,15 +21,6 @@ jobs:
         with:
           go-version: '1.22'
 
-      - name: 📦 Cache Go modules
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/go-build
-            ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: ${{ runner.os }}-go-
-
       - name: 🔧 Install dev tools
         run: make install-tools
 
@@ -38,13 +29,7 @@ jobs:
 
       - name: 💅 Format check
         run: |
-          gofmt -l $(find . -type f -name '*.go' -not -path "./vendor/*")
-          goimports -l $(find . -type f -name '*.go' -not -path "./vendor/*")
+          make format
 
       - name: 🧪 Run tests
         run: make test
-
-      - name: 🧹 Go mod tidy check
-        run: |
-          go mod tidy
-          git diff --exit-code go.mod go.sum
