@@ -10,11 +10,11 @@ import (
 )
 
 var logger *slog.Logger
-var minimumLogLevel entries.LogLevel = entries.LogLevelInfo
+var minimumLogLevel entries.LogLevel = entries.Info
 
 func Setup(cfg Config) {
 	cfg.applyDefaults()
-	minimumLogLevel = cfg.Level
+	minimumLogLevel = cfg.MinimumLogLevel
 
 	var handler slog.Handler
 	switch cfg.Format {
@@ -46,7 +46,7 @@ func Setup(cfg Config) {
 func Trace(ctx context.Context, message string, additionalData ...map[string]any) {
 	entry := entries.NewLogEntry(
 		ctx,
-		entries.LogLevelTrace,
+		entries.Trace,
 		message,
 		internal.MergeAdditionalData(additionalData...),
 	)
@@ -70,7 +70,7 @@ func Trace(ctx context.Context, message string, additionalData ...map[string]any
 func Debug(ctx context.Context, message string, additionalData ...map[string]any) {
 	entry := entries.NewLogEntry(
 		ctx,
-		entries.LogLevelDebug,
+		entries.Debug,
 		message,
 		internal.MergeAdditionalData(additionalData...),
 	)
@@ -190,8 +190,8 @@ func (c *Config) applyDefaults() {
 	if c.Format == "" {
 		c.Format = FormatJSON
 	}
-	if c.Level == "" {
-		c.Level = entries.LogLevelInfo
+	if c.MinimumLogLevel == "" {
+		c.MinimumLogLevel = entries.Info
 	}
 }
 
@@ -200,7 +200,7 @@ func extractLogLevel(entry any) entries.LogLevel {
 		return e.GetLevel()
 	}
 	// fallback: assume info
-	return entries.LogLevelInfo
+	return entries.Info
 }
 
 func shouldLog(level entries.LogLevel) bool {

@@ -43,7 +43,7 @@ func NewErrorLogEntry(ctx context.Context, err error, additionalData ...map[stri
 	entry := ErrorLogEntry{
 		LogEntry: NewLogEntry(
 			ctx,
-			LogLevelError,
+			Error,
 			err.Error(),
 			internal.MergeAdditionalData(additionalData...),
 		),

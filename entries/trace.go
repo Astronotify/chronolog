@@ -54,7 +54,7 @@ func NewTraceBeginLogEntry(
 	entry := TraceBeginLogEntry{
 		LogEntry: NewLogEntry(
 			ctx,
-			LogLevelTrace,
+			Trace,
 			"Trace started",
 			additionalData...,
 		),
@@ -86,7 +86,7 @@ func NewTraceEndLogEntryFromBegin(
 	entry := TraceEndLogEntry{
 		LogEntry: NewLogEntry(
 			begin.Context,
-			LogLevelTrace,
+			Trace,
 			"Trace ended",
 			additionalData...,
 		),

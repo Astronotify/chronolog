@@ -71,7 +71,7 @@ func NewOperationRequestLogEntry(
 	additionalData ...map[string]any,
 ) OperationRequestLogEntry {
 	entry := OperationRequestLogEntry{
-		LogEntry:      NewLogEntry(ctx, LogLevelInfo, "Operation request received", additionalData...),
+		LogEntry:      NewLogEntry(ctx, Info, "Operation request received", additionalData...),
 		OperationName: operationName,
 		Resource:      resource,
 		RequestID:     requestID,
@@ -104,7 +104,7 @@ func NewOperationResponseLogEntry(
 	duration := time.Since(req.Timestamp).Milliseconds()
 
 	entry := OperationResponseLogEntry{
-		LogEntry:      NewLogEntry(req.Context, LogLevelInfo, "Operation response sent", additionalData...),
+		LogEntry:      NewLogEntry(req.Context, Info, "Operation response sent", additionalData...),
 		OperationName: req.OperationName,
 		Resource:      req.Resource,
 		RequestID:     req.RequestID,

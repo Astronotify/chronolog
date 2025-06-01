@@ -14,8 +14,8 @@ func main() {
 
 	// Set up the logger configuration
 	cfg := chronolog.Config{
-		Format: chronolog.FormatJSON,
-		Level:  entries.LogLevelWarn, // Set the minimum log level
+		Format:          chronolog.FormatJSON,
+		MinimumLogLevel: entries.Warn, // Set the minimum log level
 	}
 	chronolog.Setup(cfg)
 
@@ -115,7 +115,7 @@ func main() {
 		"auth-pod-9f8c",
 		"auth-container",
 		"node-34a",
-		entries.LogLevelInfo,
+		entries.Info,
 		"Pod started successfully",
 		map[string]interface{}{
 			"deployment": "auth-service",

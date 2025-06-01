@@ -2,37 +2,37 @@ package entries
 
 // LogLevel represents the severity level of a log entry.
 // It is a string-based enumerated type used to ensure consistency in log level values
-// across the application. Use the predefined constants (e.g., LogLevelInfo, LogLevelError)
+// across the application. Use the predefined constants (e.g., Info, Error)
 // instead of raw strings to avoid typos and improve code clarity.
 //
 // Supported log levels:
-//   - LogLevelTrace: for fine-grained, low-level debugging information.
-//   - LogLevelDebug: for detailed debugging information that is more verbose than info logs.
-//   - LogLevelInfo:  for standard informational messages about application behavior.
-//   - LogLevelWarn:  for potentially problematic situations that require attention.
-//   - LogLevelError: for serious issues indicating failures in execution.
+//   - Trace: for fine-grained, low-level debugging information.
+//   - Debug: for detailed debugging information that is more verbose than info logs.
+//   - Info:  for standard informational messages about application behavior.
+//   - Warn:  for potentially problematic situations that require attention.
+//   - Error: for serious issues indicating failures in execution.
 type LogLevel string
 
 const (
-	// LogLevelTrace represents verbose diagnostic logs for tracing execution.
+	// Trace represents verbose diagnostic logs for tracing execution.
 	// These logs are typically used in development or for deep debugging scenarios.
-	LogLevelTrace LogLevel = "trace"
+	Trace LogLevel = "trace"
 
-	// LogLevelDebug is used for detailed debugging information that is more verbose than info logs.
+	// Debug is used for detailed debugging information that is more verbose than info logs.
 	// It is useful for diagnosing issues during development or troubleshooting.
-	LogLevelDebug LogLevel = "debug"
+	Debug LogLevel = "debug"
 
-	// LogLevelInfo indicates normal operational messages that require no action.
+	// Info indicates normal operational messages that require no action.
 	// Use this level to log events like successful startups or expected workflow steps.
-	LogLevelInfo LogLevel = "info"
+	Info LogLevel = "info"
 
-	// LogLevelWarn signals a condition that is unexpected, but the application can continue running.
+	// Warn signals a condition that is unexpected, but the application can continue running.
 	// Use this level for degraded performance, retries, or recoverable issues.
-	LogLevelWarn LogLevel = "warn"
+	Warn LogLevel = "warn"
 
-	// LogLevelError indicates a serious failure that prevents the application or request from continuing as expected.
+	// Error indicates a serious failure that prevents the application or request from continuing as expected.
 	// These logs typically require investigation or alerting.
-	LogLevelError LogLevel = "error"
+	Error LogLevel = "error"
 )
 
 var LogLevelPriority = map[LogLevel]int{

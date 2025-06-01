@@ -59,7 +59,7 @@ func NewLambdaBeginLogEntry(
 	additionalData ...map[string]any,
 ) LambdaBeginLogEntry {
 	entry := LambdaBeginLogEntry{
-		LogEntry:     NewLogEntry(ctx, LogLevelInfo, "Lambda function started", additionalData...),
+		LogEntry:     NewLogEntry(ctx, Info, "Lambda function started", additionalData...),
 		FunctionName: functionName,
 		RequestID:    requestID,
 	}
@@ -88,7 +88,7 @@ func NewLambdaEndLogEntryFromBegin(
 	duration := time.Since(begin.Timestamp).Milliseconds()
 
 	entry := LambdaEndLogEntry{
-		LogEntry:     NewLogEntry(begin.Context, LogLevelInfo, "Lambda function finished", additionalData...),
+		LogEntry:     NewLogEntry(begin.Context, Info, "Lambda function finished", additionalData...),
 		FunctionName: begin.FunctionName,
 		RequestID:    begin.RequestID,
 		DurationMs:   duration,

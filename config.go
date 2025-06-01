@@ -14,7 +14,7 @@ const (
 )
 
 type Config struct {
-	Writer io.Writer
-	Format Format
-	Level  entries.LogLevel
+	Writer          io.Writer
+	Format          Format
+	MinimumLogLevel entries.LogLevel
 }
