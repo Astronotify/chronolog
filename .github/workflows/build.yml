@@ -65,10 +65,11 @@ jobs:
       - name: 🏷️ Run semantic-release
         id: semantic
         run: |
-          semantic-release --ci | tee output.log
+          semantic-release --no-ci --provider github --token ${{ secrets.GH_TOKEN }} | tee output.log
           echo "new_tag=$(grep -oP 'v\d+\.\d+\.\d+' output.log | tail -1)" >> $GITHUB_OUTPUT
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+
 
   release:
     name: 🚀 Publish Release
