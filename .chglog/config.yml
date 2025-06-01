@@ -1,22 +1,27 @@
-# .chglog/config.yml
-title: "Changelog"
-repository_url: "https://github.com/mvleandro/chronolog"
-
-sections:
-  - title: "✨ Features"
-    labels:
-      - "feature"
-      - "enhancement"
-  - title: "🐛 Fixes"
-    labels:
-      - "bug"
-      - "fix"
-  - title: "🧰 Maintenance"
-    labels:
-      - "chore"
-      - "refactor"
-  - title: "📝 Documentation"
-    labels:
-      - "docs"
-
+style: github
 template: CHANGELOG.tpl.md
+info:
+  title: CHANGELOG
+  repository_url: https://github.com/mvleandro/chronolog
+options:
+  commits:
+    # filters:
+    #   Type:
+    #     - feat
+    #     - fix
+    #     - perf
+    #     - refactor
+  commit_groups:
+    # title_maps:
+    #   feat: Features
+    #   fix: Bug Fixes
+    #   perf: Performance Improvements
+    #   refactor: Code Refactoring
+  header:
+    pattern: "^(\\w*)\\:\\s(.*)$"
+    pattern_maps:
+      - Type
+      - Subject
+  notes:
+    keywords:
+      - BREAKING CHANGE

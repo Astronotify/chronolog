@@ -1,25 +1,40 @@
-{{- /* Title */ -}}
-# 📦 Changelog
+{{ range .Versions }}
+<a name="{{ .Tag.Name }}"></a>
+## {{ if .Tag.Previous }}[{{ .Tag.Name }}]({{ $.Info.RepositoryURL }}/compare/{{ .Tag.Previous.Name }}...{{ .Tag.Name }}){{ else }}{{ .Tag.Name }}{{ end }}
 
-All notable changes to this project will be documented in this file.
+> {{ datetime "2006-01-02" .Tag.Date }}
 
-{{- range .Versions }}
-
----
-
-## 🚀 {{ if .Tag.Previous }}[{{ .Tag.Name }}]({{ $.Info.RepositoryURL }}/compare/{{ .Tag.Previous.Name }}...{{ .Tag.Name }}){{ else }}{{ .Tag.Name }}{{ end }} - {{ datetime "2006-01-02" .Tag.Date }}
-
-{{- if .Tag.Subject }}
-> {{ .Tag.Subject }}
-{{- end }}
-
-{{- range .Sections }}
+{{ range .CommitGroups -}}
 ### {{ .Title }}
 
-{{- range .Entries }}
-- {{ if .Scope }}**{{ .Scope }}:** {{ end }}{{ .Description }}
-{{- if .References }} ({{ range $index, $ref := .References }}{{ if $index }}, {{ end }}[{{ $ref.Ref }}]({{ $ref.Link }}){{ end }}){{ end }}
-{{- end }}
-
-{{ end -}}
+{{ range .Commits -}}
+* {{ .Subject }}
 {{ end }}
+{{ end -}}
+
+{{- if .RevertCommits -}}
+### Reverts
+
+{{ range .RevertCommits -}}
+* {{ .Revert.Header }}
+{{ end }}
+{{ end -}}
+
+{{- if .MergeCommits -}}
+### Pull Requests
+
+{{ range .MergeCommits -}}
+* {{ .Header }}
+{{ end }}
+{{ end -}}
+
+{{- if .NoteGroups -}}
+{{ range .NoteGroups -}}
+### {{ .Title }}
+
+{{ range .Notes }}
+{{ .Body }}
+{{ end }}
+{{ end -}}
+{{ end -}}
+{{ end -}}
