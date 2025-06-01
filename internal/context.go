@@ -2,14 +2,15 @@ package internal
 
 import "context"
 
-const (
-	TraceIDKey      = "trace_id"
-	SpanIDKey       = "span_id"
-	ParentSpanIDKey = "parent_span_id"
+type contextKey string
 
-	VersionKey    = "version"
-	CommitHashKey = "commit_hash"
-	BuildTimeKey  = "build_time"
+const (
+	TraceIDKey      contextKey = "trace_id"
+	SpanIDKey       contextKey = "span_id"
+	ParentSpanIDKey contextKey = "parent_span_id"
+	CommitHashKey   contextKey = "commit_hash"
+	BuildTimeKey    contextKey = "build_time"
+	VersionKey      contextKey = "version"
 )
 
 func ExtractTraceID(ctx context.Context) string {
@@ -36,14 +37,6 @@ func ExtractParentSpanID(ctx context.Context) string {
 	return ""
 }
 
-func ExtractVersion(ctx context.Context) string {
-	v := ctx.Value(VersionKey)
-	if v != nil {
-		return v.(string)
-	}
-	return ""
-}
-
 func ExtractCommitHash(ctx context.Context) string {
 	v := ctx.Value(CommitHashKey)
 	if v != nil {
@@ -58,4 +51,36 @@ func ExtractBuildTime(ctx context.Context) string {
 		return v.(string)
 	}
 	return ""
+}
+
+func ExtractVersion(ctx context.Context) string {
+	v := ctx.Value(VersionKey)
+	if v != nil {
+		return v.(string)
+	}
+	return ""
+}
+
+func WithTraceID(ctx context.Context, traceID string) context.Context {
+	return context.WithValue(ctx, TraceIDKey, traceID)
+}
+
+func WithSpanID(ctx context.Context, spanID string) context.Context {
+	return context.WithValue(ctx, SpanIDKey, spanID)
+}
+
+func WithParentSpanID(ctx context.Context, parentSpanID string) context.Context {
+	return context.WithValue(ctx, ParentSpanIDKey, parentSpanID)
+}
+
+func WithCommitHash(ctx context.Context, commitHash string) context.Context {
+	return context.WithValue(ctx, CommitHashKey, commitHash)
+}
+
+func WithBuildTime(ctx context.Context, buildTime string) context.Context {
+	return context.WithValue(ctx, BuildTimeKey, buildTime)
+}
+
+func WithVersion(ctx context.Context, version string) context.Context {
+	return context.WithValue(ctx, VersionKey, version)
 }

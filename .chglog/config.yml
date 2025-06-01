@@ -1,0 +1,22 @@
+# .chglog/config.yml
+title: "Changelog"
+repository_url: "https://github.com/mvleandro/chronolog"
+
+sections:
+  - title: "✨ Features"
+    labels:
+      - "feature"
+      - "enhancement"
+  - title: "🐛 Fixes"
+    labels:
+      - "bug"
+      - "fix"
+  - title: "🧰 Maintenance"
+    labels:
+      - "chore"
+      - "refactor"
+  - title: "📝 Documentation"
+    labels:
+      - "docs"
+
+template: CHANGELOG.tpl.md

@@ -1,0 +1,34 @@
+# .goreleaser.yaml
+version: '1'
+
+builds:
+  - id: chronolog
+    main: .
+    binary: chronolog
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X main.Version={{.Version}} -X main.Commit={{.Commit}} -X main.Date={{.Date}}
+
+archives:
+  - format: tar.gz
+    files:
+      - LICENSE
+      - README.md
+
+changelog:
+  sort: desc
+  filters:
+    exclude:
+      - '^docs:'
+      - '^test:'
+
+release:
+  github:
+    owner: mvleandro
+    name: chronolog
