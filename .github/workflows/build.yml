@@ -8,13 +8,8 @@ on:
     branches:
       - main
 
-  workflow_dispatch:
-    inputs:
-      run_release:
-        description: 'Run release workflow'
-        required: false
-        default: 'true'
-        type: boolean
+permissions:
+  contents: write
 
 jobs:
   build:
