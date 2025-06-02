@@ -98,6 +98,6 @@ jobs:
       - name: 🏷️ Run semantic-release
         id: semantic
         run: |
-          semantic-release --no-ci --provider github --token ${{ secrets.GH_TOKEN }}
+          semantic-release --no-ci --provider github --token ${{ secrets.GH_TOKEN }} || true
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
