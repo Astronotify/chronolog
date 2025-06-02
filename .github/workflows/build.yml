@@ -8,6 +8,14 @@ on:
     branches:
       - main
 
+  workflow_dispatch:
+    inputs:
+      run_release:
+        description: 'Run release workflow'
+        required: false
+        default: 'true'
+        type: boolean
+
 jobs:
   build:
     name: 🧪 Lint, Test and Build
@@ -39,7 +47,7 @@ jobs:
 
   changelog:
     name: 📝 Generate Changelog
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && inputs.run_release == 'true'
     runs-on: ubuntu-latest
     needs: build
 
@@ -72,7 +80,7 @@ jobs:
 
   version:
     name: 🔖 Create Tag
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && inputs.run_release == 'true'
     runs-on: ubuntu-latest
     needs: changelog
     outputs:
@@ -104,7 +112,7 @@ jobs:
 
   release:
     name: 🚀 Publish Release
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && inputs.run_release == 'true'
     runs-on: ubuntu-latest
     needs: version
 
