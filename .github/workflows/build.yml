@@ -47,7 +47,7 @@ jobs:
 
   changelog:
     name: 📝 Generate Changelog
-    if: github.ref == 'refs/heads/main
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs: build
 
