@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - '**'
-    tags:
-      - 'v*.*.*'
   pull_request:
     branches:
       - main
@@ -39,10 +37,44 @@ jobs:
       - name: 📦 Build example
         run: make build
 
-  version:
-    name: 🔖 Create Tag
+  changelog:
+    name: 📝 Generate Changelog
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs: build
+
+    steps:
+      - name: ⬇️ Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🔧 Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.23'
+
+      - name: 🧰 Install git-chglog
+        run: |
+          go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
+          echo "$HOME/go/bin" >> $GITHUB_PATH
+
+      - name: 📝 Generate CHANGELOG.md
+        run: make changelog
+
+      - name: 🔃 Commit and push changelog
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add CHANGELOG.md
+          git commit -m "docs(changelog): update changelog [skip ci]" || echo "No changes to commit"
+          git push origin main
+
+  version:
+    name: 🔖 Create Tag
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    needs: changelog
     outputs:
       new_tag: ${{ steps.semantic.outputs.new_tag }}
 
@@ -70,28 +102,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
-
   release:
     name: 🚀 Publish Release
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
-    needs: [version]
+    needs: version
 
     steps:
-      - name: ⬇️ Checkout code
+      - name: ⬇️ Checkout
         uses: actions/checkout@v4
-
-      - name: 🔧 Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.23'
-
-      - name: 🧰 Install git-chglog
-        run: |
-          go install github.com/git-chglog/git-chglog/cmd/git-chglog@latest
-          echo "$HOME/go/bin" >> $GITHUB_PATH
-
-      - name: 📝 Generate CHANGELOG.md
-        run: make changelog
 
       - name: 📦 Create GitHub Release
         uses: softprops/action-gh-release@v2
