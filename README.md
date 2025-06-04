@@ -151,13 +151,30 @@ Logs below the configured level will be discarded.
 
 ---
 
+## 🌐 Context Enrichment
+
+Use the helpers in the `ctx` package to add trace information to your logs:
+
+```go
+import (
+    chronologctx "github.com/Astronotify/chronolog/ctx"
+)
+
+ctx := context.Background()
+ctx = chronologctx.WithTraceID(ctx, "trace-12345")
+chronolog.Info(ctx, "processing request")
+```
+
+---
+
 ## 📂 Project Structure
 
 ```
 chronolog/
 ├── entries/         # Log entry types
 ├── ctx/             # Public context helpers
-├── internal/        # Utility and handler logic
+├── level/           # Log level definitions
+├── internal/        # Utility and handler logic (internal use only)
 ├── chronolog.go     # Main API
 └── README.md
 ```
