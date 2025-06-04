@@ -5,8 +5,8 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/mvleandro/chronolog/entries"
-	"github.com/mvleandro/chronolog/internal"
+	"github.com/Astronotify/chronolog/entries"
+	"github.com/Astronotify/chronolog/internal"
 )
 
 var logger *slog.Logger

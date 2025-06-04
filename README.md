@@ -22,7 +22,7 @@ It supports multiple output formats (JSON and pretty), structured log levels, co
 ### Installation
 
 ```bash
-go get github.com/mvleandro/chronolog
+go get github.com/Astronotify/chronolog
 ```
 
 ### Basic Setup
@@ -32,7 +32,7 @@ package main
 
 import (
   "context"
-  "github.com/mvleandro/chronolog"
+  "github.com/Astronotify/chronolog"
 )
 
 func main() {

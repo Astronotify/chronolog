@@ -3,7 +3,7 @@ package entries
 import (
 	"context"
 
-	"github.com/mvleandro/chronolog/internal"
+	"github.com/Astronotify/chronolog/internal"
 )
 
 // ErrorLogEntry represents a structured log entry dedicated to error events.

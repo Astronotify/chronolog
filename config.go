@@ -3,7 +3,7 @@ package chronolog
 import (
 	"io"
 
-	"github.com/mvleandro/chronolog/entries"
+	"github.com/Astronotify/chronolog/entries"
 )
 
 type Format string

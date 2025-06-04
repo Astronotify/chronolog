@@ -13,9 +13,9 @@ BUILD_TIME := $(shell date -u +%Y-%m-%dT%H:%M:%SZ)
 COMMIT := $(shell git rev-parse --short HEAD)
 
 # Build flags
-LDFLAGS = -X 'github.com/mvleandro/chronolog/internal.LibraryVersion=$(VERSION)' \
-          -X 'github.com/mvleandro/chronolog/internal.LibraryCommit=$(COMMIT)' \
-          -X 'github.com/mvleandro/chronolog/internal.LibraryBuildTime=$(BUILD_TIME)'
+LDFLAGS = -X 'github.com/Astronotify/chronolog/internal.LibraryVersion=$(VERSION)' \
+          -X 'github.com/Astronotify/chronolog/internal.LibraryCommit=$(COMMIT)' \
+          -X 'github.com/Astronotify/chronolog/internal.LibraryBuildTime=$(BUILD_TIME)'
 
 ## ---------------------------------------------------------------------
 ## 🆘 Help

@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/mvleandro/chronolog/internal"
+	"github.com/Astronotify/chronolog/internal"
 )
 
 // LogEntry represents a structured and enriched log message emitted by the application.

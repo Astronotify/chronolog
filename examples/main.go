@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/mvleandro/chronolog"
-	"github.com/mvleandro/chronolog/entries"
-	"github.com/mvleandro/chronolog/internal"
+	"github.com/Astronotify/chronolog"
+	"github.com/Astronotify/chronolog/entries"
+	"github.com/Astronotify/chronolog/internal"
 )
 
 func main() {

@@ -1,3 +1,3 @@
-module github.com/mvleandro/chronolog
+module github.com/Astronotify/chronolog
 
 go 1.23.0
