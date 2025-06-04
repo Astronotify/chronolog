@@ -152,6 +152,7 @@ Logs below the configured level will be discarded.
 ```
 chronolog/
 ├── entries/         # Log entry types
+├── ctx/             # Public context helpers
 ├── internal/        # Utility and handler logic
 ├── chronolog.go     # Main API
 └── README.md

@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/Astronotify/chronolog"
+	chronologctx "github.com/Astronotify/chronolog/ctx"
 	"github.com/Astronotify/chronolog/entries"
-	"github.com/Astronotify/chronolog/internal"
 	Level "github.com/Astronotify/chronolog/level"
 )
 
@@ -23,14 +23,14 @@ func main() {
 	ctx := context.Background()
 
 	// Set up context with commit hash, build time and version
-	ctx = internal.WithCommitHash(ctx, "abc1234def5678ghijkl9012mnop3456")
-	ctx = internal.WithBuildTime(ctx, "2023-10-01T12:00:00Z")
-	ctx = internal.WithVersion(ctx, "0.1.0")
+	ctx = chronologctx.WithCommitHash(ctx, "abc1234def5678ghijkl9012mnop3456")
+	ctx = chronologctx.WithBuildTime(ctx, "2023-10-01T12:00:00Z")
+	ctx = chronologctx.WithVersion(ctx, "0.1.0")
 
 	// Set up context with trace and span IDs
-	ctx = internal.WithTraceID(ctx, "trace-12345")
-	ctx = internal.WithSpanID(ctx, "span-67890")
-	ctx = internal.WithParentSpanID(ctx, "parent-span-54321")
+	ctx = chronologctx.WithTraceID(ctx, "trace-12345")
+	ctx = chronologctx.WithSpanID(ctx, "span-67890")
+	ctx = chronologctx.WithParentSpanID(ctx, "parent-span-54321")
 
 	// Simple trace log
 	chronolog.Trace(ctx, "Starting profile creation process")
