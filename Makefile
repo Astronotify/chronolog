@@ -12,6 +12,8 @@ VERSION := $(shell git describe --tags --abbrev=0 2>/dev/null || echo "0.0.1")
 BUILD_TIME := $(shell date -u +%Y-%m-%dT%H:%M:%SZ)
 COMMIT := $(shell git rev-parse --short HEAD)
 
+EXAMPLE ?= main.go
+
 # Build flags
 LDFLAGS = -X 'github.com/Astronotify/chronolog/internal.LibraryVersion=$(VERSION)' \
           -X 'github.com/Astronotify/chronolog/internal.LibraryCommit=$(COMMIT)' \
@@ -33,18 +35,9 @@ build: ## Build the Go project
 	@echo "${YELLOW}Building the module...${RESET}"
 	go build -ldflags "$(LDFLAGS)" -o bin/$(APP_NAME) ./examples
 
-RUN_EXAMPLE_NAME := $(word 2,$(MAKECMDGOALS))
-
 run-example: ## Run the example application
-        @echo "${YELLOW}Running example...${RESET}"
-        @if [ -z "$(RUN_EXAMPLE_NAME)" ]; then \
-                go run ./examples/main.go; \
-        else \
-                go run ./examples/$(RUN_EXAMPLE_NAME)/main.go; \
-        fi
-
-$(RUN_EXAMPLE_NAME):
-        @:
+	@echo "${YELLOW}Running example...${RESET}"
+	go run ./examples/$(EXAMPLE)
 
 ## ---------------------------------------------------------------------
 ## 🧪 Test & Quality
