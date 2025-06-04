@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/Astronotify/chronolog/internal"
+	Level "github.com/Astronotify/chronolog/level"
 )
 
 // LogEntry represents a structured and enriched log message emitted by the application.
@@ -48,10 +49,10 @@ import (
 type LogEntry struct {
 	Context context.Context `json:"-"`
 
-	Timestamp time.Time `json:"timestamp"`
-	Level     LogLevel  `json:"level"`
-	EventType string    `json:"event_type"`
-	Message   string    `json:"message"`
+	Timestamp time.Time      `json:"timestamp"`
+	Level     Level.LogLevel `json:"level"`
+	EventType string         `json:"event_type"`
+	Message   string         `json:"message"`
 
 	// Trace metadata
 	TraceID      string `json:"trace_id,omitempty"`
@@ -82,7 +83,7 @@ type LogEntry struct {
 // Parameters:
 //
 //   - ctx (context.Context): the execution context used to extract trace IDs and other metadata.
-//   - level (LogLevel): the severity level of the log entry (e.g., LogLevelInfo, LogLevelError).
+//   - level (Level.LogLevel): the severity level of the log entry (e.g., LogLevelInfo, LogLevelError).
 //   - message (string): a human-readable description of the log event.
 //   - additionalData (...map[string]any): optional variadic key-value maps that will be merged
 //     into the final `AdditionalData` field.
@@ -90,7 +91,7 @@ type LogEntry struct {
 // Returns:
 //
 //   - LogEntry: a fully enriched structured log entry ready to be serialized or dispatched.
-func NewLogEntry(ctx context.Context, level LogLevel, message string, additionalData ...map[string]any) LogEntry {
+func NewLogEntry(ctx context.Context, level Level.LogLevel, message string, additionalData ...map[string]any) LogEntry {
 	return LogEntry{
 		Context:          ctx,
 		Timestamp:        time.Now().UTC(),
@@ -111,6 +112,6 @@ func NewLogEntry(ctx context.Context, level LogLevel, message string, additional
 	}
 }
 
-func (l LogEntry) GetLevel() LogLevel {
+func (l LogEntry) GetLevel() Level.LogLevel {
 	return l.Level
 }

@@ -3,6 +3,8 @@ package entries
 import (
 	"context"
 	"time"
+
+	Level "github.com/Astronotify/chronolog/level"
 )
 
 // MessageReceivedLogEntry represents a log entry indicating that a message has been received
@@ -82,7 +84,7 @@ func NewMessageReceivedLogEntry(
 	additionalData ...map[string]any,
 ) MessageReceivedLogEntry {
 	entry := MessageReceivedLogEntry{
-		LogEntry:  NewLogEntry(ctx, Info, "Message received", additionalData...),
+		LogEntry:  NewLogEntry(ctx, Level.Info, "Message received", additionalData...),
 		MessageID: messageID,
 		Topic:     topic,
 		Consumer:  consumer,
@@ -109,7 +111,7 @@ func NewMessageAcknowledgedLogEntryFromReceived(
 	duration := time.Since(received.Timestamp).Milliseconds()
 
 	entry := MessageAcknowledgedLogEntry{
-		LogEntry:   NewLogEntry(received.Context, Info, "Message acknowledged", additionalData...),
+		LogEntry:   NewLogEntry(received.Context, Level.Info, "Message acknowledged", additionalData...),
 		MessageID:  received.MessageID,
 		Topic:      received.Topic,
 		Consumer:   received.Consumer,
@@ -139,7 +141,7 @@ func NewMessageRejectedLogEntryFromReceived(
 	duration := time.Since(received.Timestamp).Milliseconds()
 
 	entry := MessageRejectedLogEntry{
-		LogEntry:   NewLogEntry(received.Context, Error, "Message rejected", additionalData...),
+		LogEntry:   NewLogEntry(received.Context, Level.Error, "Message rejected", additionalData...),
 		MessageID:  received.MessageID,
 		Topic:      received.Topic,
 		Consumer:   received.Consumer,

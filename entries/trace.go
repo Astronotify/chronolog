@@ -3,6 +3,8 @@ package entries
 import (
 	"context"
 	"time"
+
+	Level "github.com/Astronotify/chronolog/level"
 )
 
 // TraceBeginLogEntry represents the beginning of a trace section in the application flow.
@@ -54,7 +56,7 @@ func NewTraceBeginLogEntry(
 	entry := TraceBeginLogEntry{
 		LogEntry: NewLogEntry(
 			ctx,
-			Trace,
+			Level.Trace,
 			"Trace started",
 			additionalData...,
 		),
@@ -86,7 +88,7 @@ func NewTraceEndLogEntryFromBegin(
 	entry := TraceEndLogEntry{
 		LogEntry: NewLogEntry(
 			begin.Context,
-			Trace,
+			Level.Trace,
 			"Trace ended",
 			additionalData...,
 		),

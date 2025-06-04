@@ -3,7 +3,7 @@ package chronolog
 import (
 	"io"
 
-	"github.com/Astronotify/chronolog/entries"
+	Level "github.com/Astronotify/chronolog/level"
 )
 
 type Format string
@@ -16,5 +16,5 @@ const (
 type Config struct {
 	Writer          io.Writer
 	Format          Format
-	MinimumLogLevel entries.LogLevel
+	MinimumLogLevel Level.LogLevel
 }

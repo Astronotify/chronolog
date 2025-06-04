@@ -8,6 +8,7 @@ import (
 	"github.com/Astronotify/chronolog"
 	"github.com/Astronotify/chronolog/entries"
 	"github.com/Astronotify/chronolog/internal"
+	Level "github.com/Astronotify/chronolog/level"
 )
 
 func main() {
@@ -15,7 +16,7 @@ func main() {
 	// Set up the logger configuration
 	cfg := chronolog.Config{
 		Format:          chronolog.FormatJSON,
-		MinimumLogLevel: entries.Warn, // Set the minimum log level
+		MinimumLogLevel: Level.Warn, // Set the minimum log level
 	}
 	chronolog.Setup(cfg)
 
@@ -115,7 +116,7 @@ func main() {
 		"auth-pod-9f8c",
 		"auth-container",
 		"node-34a",
-		entries.Info,
+		Level.Info,
 		"Pod started successfully",
 		map[string]interface{}{
 			"deployment": "auth-service",

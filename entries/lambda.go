@@ -3,6 +3,8 @@ package entries
 import (
 	"context"
 	"time"
+
+	Level "github.com/Astronotify/chronolog/level"
 )
 
 // LambdaBeginLogEntry represents the initial log entry for an AWS Lambda function invocation.
@@ -59,7 +61,7 @@ func NewLambdaBeginLogEntry(
 	additionalData ...map[string]any,
 ) LambdaBeginLogEntry {
 	entry := LambdaBeginLogEntry{
-		LogEntry:     NewLogEntry(ctx, Info, "Lambda function started", additionalData...),
+		LogEntry:     NewLogEntry(ctx, Level.Info, "Lambda function started", additionalData...),
 		FunctionName: functionName,
 		RequestID:    requestID,
 	}
@@ -88,7 +90,7 @@ func NewLambdaEndLogEntryFromBegin(
 	duration := time.Since(begin.Timestamp).Milliseconds()
 
 	entry := LambdaEndLogEntry{
-		LogEntry:     NewLogEntry(begin.Context, Info, "Lambda function finished", additionalData...),
+		LogEntry:     NewLogEntry(begin.Context, Level.Info, "Lambda function finished", additionalData...),
 		FunctionName: begin.FunctionName,
 		RequestID:    begin.RequestID,
 		DurationMs:   duration,

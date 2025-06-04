@@ -3,6 +3,8 @@ package entries
 import (
 	"context"
 	"time"
+
+	Level "github.com/Astronotify/chronolog/level"
 )
 
 // OperationRequestLogEntry represents the log entry for the start of a logical application operation,
@@ -71,7 +73,7 @@ func NewOperationRequestLogEntry(
 	additionalData ...map[string]any,
 ) OperationRequestLogEntry {
 	entry := OperationRequestLogEntry{
-		LogEntry:      NewLogEntry(ctx, Info, "Operation request received", additionalData...),
+		LogEntry:      NewLogEntry(ctx, Level.Info, "Operation request received", additionalData...),
 		OperationName: operationName,
 		Resource:      resource,
 		RequestID:     requestID,
@@ -104,7 +106,7 @@ func NewOperationResponseLogEntry(
 	duration := time.Since(req.Timestamp).Milliseconds()
 
 	entry := OperationResponseLogEntry{
-		LogEntry:      NewLogEntry(req.Context, Info, "Operation response sent", additionalData...),
+		LogEntry:      NewLogEntry(req.Context, Level.Info, "Operation response sent", additionalData...),
 		OperationName: req.OperationName,
 		Resource:      req.Resource,
 		RequestID:     req.RequestID,

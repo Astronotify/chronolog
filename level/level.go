@@ -1,4 +1,4 @@
-package entries
+package Level
 
 // LogLevel represents the severity level of a log entry.
 // It is a string-based enumerated type used to ensure consistency in log level values

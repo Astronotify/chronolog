@@ -7,10 +7,11 @@ import (
 
 	"github.com/Astronotify/chronolog/entries"
 	"github.com/Astronotify/chronolog/internal"
+	Level "github.com/Astronotify/chronolog/level"
 )
 
 var logger *slog.Logger
-var minimumLogLevel entries.LogLevel = entries.Info
+var minimumLogLevel Level.LogLevel = Level.Info
 
 func Setup(cfg Config) {
 	cfg.applyDefaults()
@@ -46,7 +47,7 @@ func Setup(cfg Config) {
 func Trace(ctx context.Context, message string, additionalData ...map[string]any) {
 	entry := entries.NewLogEntry(
 		ctx,
-		entries.Trace,
+		Level.Trace,
 		message,
 		internal.MergeAdditionalData(additionalData...),
 	)
@@ -70,7 +71,7 @@ func Trace(ctx context.Context, message string, additionalData ...map[string]any
 func Debug(ctx context.Context, message string, additionalData ...map[string]any) {
 	entry := entries.NewLogEntry(
 		ctx,
-		entries.Debug,
+		Level.Debug,
 		message,
 		internal.MergeAdditionalData(additionalData...),
 	)
@@ -95,7 +96,7 @@ func Debug(ctx context.Context, message string, additionalData ...map[string]any
 func Info(ctx context.Context, message string, additionalData ...map[string]any) {
 	entry := entries.NewLogEntry(
 		ctx,
-		"info",
+		Level.Info,
 		message,
 		internal.MergeAdditionalData(additionalData...),
 	)
@@ -118,7 +119,7 @@ func Info(ctx context.Context, message string, additionalData ...map[string]any)
 func Warn(ctx context.Context, message string, additionalData ...map[string]any) {
 	entry := entries.NewLogEntry(
 		ctx,
-		"warn",
+		Level.Warn,
 		message,
 		internal.MergeAdditionalData(additionalData...),
 	)
@@ -191,18 +192,18 @@ func (c *Config) applyDefaults() {
 		c.Format = FormatJSON
 	}
 	if c.MinimumLogLevel == "" {
-		c.MinimumLogLevel = entries.Info
+		c.MinimumLogLevel = Level.Info
 	}
 }
 
-func extractLogLevel(entry any) entries.LogLevel {
-	if e, ok := entry.(interface{ GetLevel() entries.LogLevel }); ok {
+func extractLogLevel(entry any) Level.LogLevel {
+	if e, ok := entry.(interface{ GetLevel() Level.LogLevel }); ok {
 		return e.GetLevel()
 	}
 	// fallback: assume info
-	return entries.Info
+	return Level.Info
 }
 
-func shouldLog(level entries.LogLevel) bool {
-	return entries.LogLevelPriority[level] >= entries.LogLevelPriority[minimumLogLevel]
+func shouldLog(level Level.LogLevel) bool {
+	return Level.LogLevelPriority[level] >= Level.LogLevelPriority[minimumLogLevel]
 }

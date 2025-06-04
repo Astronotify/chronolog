@@ -1,6 +1,10 @@
 package entries
 
-import "context"
+import (
+	"context"
+
+	Level "github.com/Astronotify/chronolog/level"
+)
 
 // K8SLogEntry represents a structured log entry containing Kubernetes-specific context.
 //
@@ -36,7 +40,7 @@ type K8SLogEntry struct {
 //   - podName (string): the name of the pod that produced the log.
 //   - container (string): the name of the container inside the pod.
 //   - nodeName (string): the name of the node hosting the pod.
-//   - level (LogLevel): the severity level of the log.
+//   - level (Level.LogLevel): the severity level of the log.
 //   - message (string): the log message content.
 //   - additionalData (...map[string]any): optional structured metadata for enrichment.
 //
@@ -46,7 +50,7 @@ type K8SLogEntry struct {
 func NewK8SLogEntry(
 	ctx context.Context,
 	clusterName, namespace, podName, container, nodeName string,
-	level LogLevel, message string,
+	level Level.LogLevel, message string,
 	additionalData ...map[string]any,
 ) K8SLogEntry {
 	entry := K8SLogEntry{

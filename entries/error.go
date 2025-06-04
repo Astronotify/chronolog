@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/Astronotify/chronolog/internal"
+	Level "github.com/Astronotify/chronolog/level"
 )
 
 // ErrorLogEntry represents a structured log entry dedicated to error events.
@@ -43,7 +44,7 @@ func NewErrorLogEntry(ctx context.Context, err error, additionalData ...map[stri
 	entry := ErrorLogEntry{
 		LogEntry: NewLogEntry(
 			ctx,
-			Error,
+			Level.Error,
 			err.Error(),
 			internal.MergeAdditionalData(additionalData...),
 		),
