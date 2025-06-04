@@ -181,6 +181,21 @@ chronolog/
 
 ---
 
+## 📚 Examples
+
+Several runnable examples live in the `examples/` directory:
+
+- `main.go` – comprehensive demo covering traces, operations, messages and more.
+- `httpserver/` – basic HTTP handler emitting `OperationRequestLogEntry` and
+  `OperationResponseLogEntry` for each request.
+- `message_consumer/` – illustrates a message lifecycle with `Received`,
+  `Acknowledged` and `Rejected` events.
+- `lambda/` – shows how to pair `LambdaBeginLogEntry` and `LambdaEndLogEntry`.
+
+Run any example with `go run ./examples/<name>`.
+
+---
+
 ## 📖 License
 
 MIT License
