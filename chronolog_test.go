@@ -46,3 +46,21 @@ func TestWriteLevelMapping(t *testing.T) {
 		t.Errorf("levels mismatch: got %v want %v", handler.levels, want)
 	}
 }
+
+func TestLoggingWithoutSetupDoesNotPanic(t *testing.T) {
+	logger = nil
+	minimumLogLevel = Level.Info
+	ctx := context.Background()
+
+	defer func() {
+		if r := recover(); r != nil {
+			t.Fatalf("logging panicked: %v", r)
+		}
+	}()
+
+	Info(ctx, "hello")
+
+	if logger == nil {
+		t.Errorf("logger should be initialized by write")
+	}
+}

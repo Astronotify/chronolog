@@ -46,6 +46,10 @@ func main() {
 }
 ```
 
+Call `chronolog.Setup` during your application's initialization phase before
+invoking any logging functions. If it isn't called, Chronolog will fall back to
+a basic text logger.
+
 ---
 
 ## 🧱 Log Entry Types
