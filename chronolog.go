@@ -181,7 +181,22 @@ func write(ctx context.Context, entry any) {
 	if !shouldLog(level) {
 		return
 	}
-	logger.Log(ctx, slog.LevelInfo, "log", slog.Any("event", entry))
+	logger.Log(ctx, mapLogLevel(level), "log", slog.Any("event", entry))
+}
+
+func mapLogLevel(level Level.LogLevel) slog.Level {
+	switch level {
+	case Level.Trace, Level.Debug:
+		return slog.LevelDebug
+	case Level.Info:
+		return slog.LevelInfo
+	case Level.Warn:
+		return slog.LevelWarn
+	case Level.Error:
+		return slog.LevelError
+	default:
+		return slog.LevelInfo
+	}
 }
 
 func (c *Config) applyDefaults() {
