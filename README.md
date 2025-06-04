@@ -38,7 +38,7 @@ import (
 func main() {
   chronolog.Setup(chronolog.Config{
     Format: chronolog.FormatPretty,
-    MiminumLogLevel:  chronolog.Info,
+    MinimumLogLevel:  chronolog.Info,
   })
 
   ctx := context.Background()
