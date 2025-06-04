@@ -181,6 +181,9 @@ func write(ctx context.Context, entry any) {
 	if !shouldLog(level) {
 		return
 	}
+	if logger == nil {
+		logger = slog.New(slog.NewTextHandler(os.Stdout, nil))
+	}
 	logger.Log(ctx, mapLogLevel(level), "log", slog.Any("event", entry))
 }
 
