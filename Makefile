@@ -33,9 +33,18 @@ build: ## Build the Go project
 	@echo "${YELLOW}Building the module...${RESET}"
 	go build -ldflags "$(LDFLAGS)" -o bin/$(APP_NAME) ./examples
 
+RUN_EXAMPLE_NAME := $(word 2,$(MAKECMDGOALS))
+
 run-example: ## Run the example application
-	@echo "${YELLOW}Running example...${RESET}"
-	go run ./examples/main.go
+        @echo "${YELLOW}Running example...${RESET}"
+        @if [ -z "$(RUN_EXAMPLE_NAME)" ]; then \
+                go run ./examples/main.go; \
+        else \
+                go run ./examples/$(RUN_EXAMPLE_NAME)/main.go; \
+        fi
+
+$(RUN_EXAMPLE_NAME):
+        @:
 
 ## ---------------------------------------------------------------------
 ## 🧪 Test & Quality
